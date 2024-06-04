@@ -80,8 +80,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="Date">Select Date</label>
-                    <input type="date" name="Date" id="Date">
+                    <label for="Date_of_Booking">Select Date</label>
+                    <input type="date" name="Date_of_Booking" id="Date_of_Booking">
                 </div>
                 <button type="submit" onclick="register()" class="btn" style="background-color: rgb(201, 146, 79);">Send request to book </button>
             </form>
@@ -114,7 +114,7 @@
             var phoneNumber = document.getElementById('Phone_Number').value;
             var email = document.getElementById('Email').value;
             var room = document.getElementById('Room').value;
-            var date = document.getElementById('Date').value;
+            var date = document.getElementById('Date_of_Booking').value;
             // Form validation
             if (name.trim() === '') {
                 alert('Please enter your name.');
