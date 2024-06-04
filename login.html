@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #mainbody{
+            background-color: bisque;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width:100vw;
+            margin:50px;
+        }
+        body{
+            background-color: bisque;
+        }
+
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: background-color 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+        }
+
+        .active-tabcontent {
+            display: block;
+        }
+
+        input{
+            border:1px solid #f7c08a;
+            padding:10px;
+        }
+
+        #box_building{
+            border: 1px solid black;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+            padding:20px;
+            background-color: #f7c08a;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+        <div class="container">
+                <h1 class="logo"><a href="index.html">RS</a></h1>
+                <ul>
+                    <li><a  href="index.html">Home</a></li>
+                </ul>
+              </div>
+            </nav>  
+    </header>
+    <div id="mainbody">
+        <div id="box_building">
+
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Login')">Login</button>
+                <button class="tablinks" onclick="openTab(event, 'Registration')">Registration</button>
+            </div>
+            
+            <!-- Login Tab Content -->
+            <div id="Login" class="tabcontent">
+                <h3>Login</h3>
+                <form id="loginForm" onsubmit="login(event)">
+                    <input type="text" id="loginUsername" placeholder="Username" required><br>
+                    <input type="password" id="loginPassword" placeholder="Password" required><br>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+            
+            <!-- Registration Tab Content -->
+            <div id="Registration" class="tabcontent">
+                <h3>Registration</h3>
+                <form id="registrationForm" onsubmit="">
+                    <input type="text" id="username" placeholder="Username" required><br>
+                    <input type="password" id="password" placeholder="Password" required><br>
+                    <input type="submit" value="Register" onclick="validate(event)">
+                </form>
+            </div>
+        </div>
+    </div>
+        
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function register(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            localStorage.setItem(username, password);
+            localStorage.setItem("logged_in_user",username);
+            alert("Registration successful!");
+            window.location.href = "index.html";
+        }
+        function login(event) {
+            event.preventDefault();
+            var username = document.getElementById("loginUsername").value;
+            var password = document.getElementById("loginPassword").value;
+            var storedPassword = localStorage.getItem(username);
+            if (password === storedPassword) {
+                localStorage.setItem("logged_in_user",username);
+                alert('Login successful');
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+        function validate(event){
+            var x=document.getElementById("username").value;
+            var y=document.getElementById("password").value;
+            if(x==='')
+            {
+                alert("username cannot be empty");
+                return;
+            }
+            if(y.length<8){
+                alert("password cannot be of length less than 8");
+                return;
+            }
+            register(event);
+        }
+        document.getElementsByClassName("tablinks")[0].click();
+    </script>
+</body>
+
+</html>

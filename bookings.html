@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Dobro dosli u najbolji kafic na svetu">
+    <meta name="keywords" content="Kafic">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Hotel RS - Bookings</title>
+    <style>
+        select{
+            padding:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="container">
+                <h1 class="logo"><a href="index.html">RS</a></h1>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section id="features">
+        <div class="box">
+            <img src="images/classic_room.webp" class="rooms">
+            <div class="feature-content">
+                Classic Room
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/deluxe_room.webp" class="rooms">
+            <div class="feature-content">
+                Deluxe Room
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/family_room.webp" class="rooms">
+            <div class="feature-content">
+                Family Room
+            </div>
+        </div>
+    </section>
+    <div class="clr"></div>
+    <section id="contact-form" class="py-3">
+        <div class="container">
+            <h1 class="l-heading"><span class="text-primary">Book Your Room</span></h1>
+            <p>We will get back to you within 24hrs.</p>
+
+
+
+            <form name="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="Name" id="Name">
+                </div>
+                <div class="form-group">
+                    <label for="Phone_Number">Phone Number</label>
+                    <input type="number" name="Phone_Number" id="Phone_Number">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="Email" id="Email">
+                </div>
+                <div class="form-group">
+                    <label for="Room">Select Room</label>
+                    <select name="Room" id="Room">
+                        <option value="">Choose Room</option>
+                        <option value="Standard Room">Standard Room</option>
+                        <option value="Deluxe Room">Deluxe Room</option>
+                        <option value="Family Room">Family Room</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Date">Select Date</label>
+                    <input type="date" name="Date" id="Date">
+                </div>
+                <button type="submit" onclick="register()" class="btn" style="background-color: rgb(201, 146, 79);">Send request to book </button>
+            </form>
+        </div>
+    </section>
+    <section id="contact-info" class="bg-dark">
+        <div class="container">
+            <div class="box ">
+                <i class="fas fa-hotel fa-3x"></i>
+                <h3> Location</h3>
+                <p>UPES Dehradun, Uttarakhand. 248007</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-phone fa-3x"></i>
+                <h3>Telephone Number</h3>
+                <p>1234567890</p>
+            </div>
+            <div class="box ">
+                <i class="fas fa-envelope fa-3x"></i>
+                <h3>Email Address</h3>
+                <p>rakshitsingh31773@gmail.com</p>
+            </div>
+        </div>
+
+    </section>
+    <script>
+        function register() 
+        {
+            var name = document.getElementById('Name').value;
+            var phoneNumber = document.getElementById('Phone_Number').value;
+            var email = document.getElementById('Email').value;
+            var room = document.getElementById('Room').value;
+            var date = document.getElementById('Date').value;
+            // Form validation
+            if (name.trim() === '') {
+                alert('Please enter your name.');
+                return;
+            }
+
+            if (phoneNumber.trim() === '') {
+                alert('Please enter your phone number.');
+                return;
+            } else if (phoneNumber.length > 10 || phoneNumber.length < 10) {
+                alert('Please enter valid phone number.');
+                return;
+            }
+
+            if (email.trim() === '') {
+                alert('Please enter your email.');
+                return;
+            } else if (!/\S+@\S+\.\S+/.test(email.trim())) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (room === '') {
+                alert("Choose Room");
+                return;
+            }
+
+            if (date.trim() === ''){
+                alert("Choose Date");
+                return;
+            }
+
+        
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxLjKp-yxnEBAcQ5weF1V4I92hDRIyLndgvp2AMQWjyNi5uWSszXX3Wh4z4L0XdH8D1/exec'
+        const form = document.forms['contact-form']
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => alert("Thank you! your form is submitted successfully."))
+                .then(() => { window.location.reload(); })
+                .catch(error => console.error('Error!', error.message))
+        })
+    }
+
+    </script>
+</body>
+
+</html>

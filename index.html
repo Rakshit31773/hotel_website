@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Dobro dosli u najbolji kafic na svetu">
+    <meta name="keywords" content="Kafic">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Hotel RS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="container">
+                <h1 class="logo"><a href="index.html">RS</a></h1>
+
+
+
+                <ul>
+                    <li><a class="current" href="index.html">Home</a></li>
+                    <li><a id='booking' onclick="verify_if_login()">Book Your Room</a></li>
+                    <li><a href="login.html" id="account">Login/Register</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div><marquee id="usernameDisplaypls" onmouseover="stop()" onmouseout="start()" direction="right" behavior="alternate">Hello</marquee></div>
+        <div id="showcase">
+            <div class="container">
+                <div class="showcase-content">
+                    <h1><span class="text-primary">Enjoy</span> your stay</h1>
+                    <p class="lead">One of the BEST Hotels out there</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+
+    </section>
+    <section id="home-info" class="bg-dark">
+        <div class="info-img"></div>
+        <div class="info-content">
+            <h2><span class="text-primary">History</span> of our Hotel</h2>
+            <p>
+                Our hotel has a great History.
+            </p>
+        </div>
+    </section>
+    <div class="clr"></div>
+
+    <section id="about-info" class="bg-light">
+        <div class="info-content">
+            <h2><span class="text-primary">About</span> our Hotel</h2>
+            <p>
+                Over the years, RS has built a reputation for highlight any awards or recognitions, exceptional service, or guest satisfaction. Whether you're traveling for business or leisure, our hotel strives to provide a comfortable and memorable stay experience.
+            </p>
+        </div>
+        <div class="info-img"></div>
+    </section>
+
+    <div class="clr"></div>
+
+    <section id="testimonials" class="py-3">
+        <div class="container">
+            <h2 class="l-heading ">What our guest says</h2>
+            <div class="testimonial bg-primary">
+                <img src="images/person-1.jpg" alt="Samanta">
+                <p>Impeccable Cleanliness and Outstanding Service! From the moment we stepped into [Hotel Name], we were greeted with a spotless lobby and a warm welcome from the staff. Our room was immaculately clean, and every detail was attended to with care. The housekeeping team deserves special praise for maintaining such high standards of cleanliness throughout our stay. </p>
+
+            </div>
+
+            <div class="testimonial bg-primary">
+                <img src="images/person-2.jpg" alt="Jen">
+                <p>A Gem of Cleanliness, Culinary Excellence, and Hospitality! Our recent stay at [Hotel Name] left us thoroughly impressed on every front. The hotel's commitment to cleanliness was evident from the moment we checked in, with every corner of the property gleaming and sanitized. Our room was a sanctuary of cleanliness, and we felt completely at ease throughout our stay</p>
+
+            </div>
+        </div>
+        <div class="clr"></div>
+        <div class="clr"></div>
+
+        <section id="features" ng-app="myApp" ng-controller="myCtrl">
+            <div class="box">
+                <button class="feature-btn" ng-click="location_content()">
+                    <i class="fas fa-hotel fa-3x"></i>
+                    <h3>Great Location</h3>
+                    <i class="fas fa-caret-down"></i>
+                </button>
+                <div class="feature-content" ng-if="loc">
+                    <p>Dehradun</p>
+                    <ul>
+                        <li>Natural Beauty</li>
+                        <li>Scenic Landscapes</li>
+                        <li>Gateway to Major Tourist Destinations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <button class="feature-btn" ng-click="meal_content()">
+                    <i class="fas fa-utensils fa-3x"></i>
+                    <h3>Quality Meals</h3>
+                    <i class="fas fa-caret-down"></i>
+                </button>
+                <div class="feature-content" ng-if="meal">
+                    <p>Lipsmacking Food</p>
+                    <ul>
+                        <li>Available 24x7</li>
+                        <li>Rich Dairy Products and Sweets</li>
+                        <li>Authentic Garhwali and Kumaoni Cuisine</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <button class="feature-btn" ng-click="gym_content()">
+                    <i class="fas fa-dumbbell fa-3x"></i>
+                    <h3>Gym</h3>
+                    <i class="fas fa-caret-down"></i>
+                </button>
+                <div class="feature-content" ng-if="gym">
+                    <p>Muscles</p>
+                    <ul>
+                        <li>Modern Equipment and Facilities</li>
+                        <li>Personal Training and Group Classes</li>
+                        <li>Wellness and Spa Services</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <footer id="main-footer">
+        </footer>
+
+        <script>
+            var username = localStorage.getItem("logged_in_user");
+            var u = document.getElementById("usernameDisplaypls");
+            var x=document.getElementById("account");
+            if(username){
+                u.textContent="Welcome "+username+"!";
+                x.href="logout.html";
+                x.innerHTML="Logout";
+            }
+            else{
+                u.innerHTML="Welcome to our Website";
+                x.href="login.html";
+                x.innerHTML="Login/Register";
+            }
+
+            function verify_if_login()
+            {
+                var u = document.getElementById("usernameDisplaypls").innerHTML;
+                if(u==='Welcome to our Website')
+                {
+                    alert("Please Login/Register first");
+                }
+                else
+                {
+                    document.getElementById('booking').href="bookings.html";
+                }
+            }
+        </script>
+        <script src="javascr.js"></script>
+</body>
+
+</html>
